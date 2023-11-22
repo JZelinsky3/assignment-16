@@ -1,0 +1,92 @@
+[
+    {
+      "title": "The Grand Budapest Hotel",
+      "genre": "Comedy",
+      "year": 2014,
+      "actors": [
+        "Ralph Fiennes",
+        "F. Murray Abraham",
+        "Mathieu Amalric"
+      ],
+      "director": "Wes Anderson",
+      "rating": 8.1,
+      "quotes": [
+        "You see, there are still faint glimmers of civilization left in this barbaric slaughterhouse that was once known as humanity."
+      ]
+    },
+    {
+      "title": "Superbad",
+      "genre": "Comedy",
+      "year": 2007,
+      "actors": [
+        "Jonah Hill",
+        "Michael Cera",
+        "Christopher Mintz-Plasse"
+      ],
+      "director": "Greg Mottola",
+      "rating": 7.6,
+      "quotes": [
+        "I am McLovin!"
+      ]
+    },
+    {
+      "title": "Anchorman: The Legend of Ron Burgundy",
+      "genre": "Comedy",
+      "year": 2004,
+      "actors": [
+        "Will Ferrell",
+        "Christina Applegate",
+        "Paul Rudd"
+      ],
+      "director": "Adam McKay",
+      "rating": 7.2,
+      "quotes": [
+        "60% of the time, it works every time."
+      ]
+    },
+    {
+      "title": "The Hangover",
+      "genre": "Comedy",
+      "year": 2009,
+      "actors": [
+        "Bradley Cooper",
+        "Ed Helms",
+        "Zach Galifianakis"
+      ],
+      "director": "Todd Phillips",
+      "rating": 7.7,
+      "quotes": [
+        "What happens in Vegas, stays in Vegas."
+      ]
+    },
+    {
+      "title": "Bridesmaids",
+      "genre": "Comedy",
+      "year": 2011,
+      "actors": [
+        "Kristen Wiig",
+        "Maya Rudolph",
+        "Rose Byrne"
+      ],
+      "director": "Paul Feig",
+      "rating": 6.8,
+      "quotes": [
+        "I’m ready to party with the best of them."
+      ]
+    },
+    {
+      "title": "Napoleon Dynamite",
+      "genre": "Comedy",
+      "year": 2004,
+      "actors": [
+        "Jon Heder",
+        "Efren Ramirez",
+        "Jon Gries"
+      ],
+      "director": "Jared Hess",
+      "rating": 6.9,
+      "quotes": [
+        "Vote for Pedro."
+      ]
+    }
+  ]
