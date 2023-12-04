@@ -1,64 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <title>Comedy Movies</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <script src="script.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <a href="#"><h1>Comedy Movies</h1></a>
+    <header>
+        <h1>Luxurious Cars</h1>
+        <a href="#" id="add-link">+</a>
+    </header>
 
-        <section id="movie-list">
-            <!-- Movie list will be dynamically generated here -->
-            <a href="#" class="edit-button" onclick="editMovie()">&#9998;</a>
-            <a href="#" class="delete-button" onclick="confirmDelete()">&#x2715;</a>
-        </section>
+    <div class="columns two-columns">
+        <div id="car-list" class="columns"></div>
+        <div id="car-details-column">
+            <h2>Details</h2>
 
-        <section id="movie-details">
-            
-        </section>
-
-        <div class="dialog transparent">
-            <div class="dialog-content">
-                <span class="close">&#10006;</span>
-                <h2 id="add-edit-title">Add Movie</h2>
-                <form id="add-edit-movie-form" class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required>
-
-                    <label for="genre">Genre:</label>
-                    <input type="text" id="genre" name="genre" required>
-
-                    <label for="director">Director:</label>
-                    <input type="text" id="director" name="director">
-
-                    <label for="actors">Actors:</label>
-                    <input type="text" id="actors" name="actors">
-
-                    <label for="rating">Rating:</label>
-                    <input type="number" id="rating" name="rating" step="0.1">
-
-                    <label for="quotes">Quotes:</label>
-                    <input type="text" id="quotes" name="quotes">
-
-                    <button type="submit">Save</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="delete-modal" class="dialog transparent">
-            <div class="dialog-content">
-                <span class="close" id="cancel-delete">&#10006;</span>
-                <h2>Delete Movie</h2>
-                <p>Are you sure you want to delete this movie?</p>
-                <button id="confirm-delete" class="button">Yes, Delete</button>
-            </div>
+            <div id="car-details"></div>
         </div>
     </div>
+    <div id="add-edit-car-container" class="dialog transparent">
+        <span class="close">&times;</span>
 
-    <script src="script.js"></script>
+        <h3 id="add-edit-title">Car Information</h3>
+        <form id="add-edit-car-form" method="post">
+            <input type="hidden" name="_id" value="-1" />
+            <p>
+                <label for="make">Make:</label>
+                <input type="text" id="make" name="make" required />
+            </p>
+            <p>
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model" required />
+            </p>
+            <p>
+                <label for="year">Year:</label>
+                <input type="text" id="year" name="year" required />
+            </p>
+            <p>
+                <label for="color">Color:</label>
+                <input type="text" id="color" name="color" required />
+            </p>
+            <p>
+                <label for="img">Add Image:</label>
+                <input type="file" id="img" name="img" />
+            </p>
+            <p id="chars-p">
+                <label class="inline">Characteristics:</label>
+                <a href="#" id="add-char">Add Characteristics</a>
+                <section id="char-boxes"></section>
+            </p>
+            <p>
+                <button type="submit">Submit</button>
+            </p>
+        </form>
+    </div>
 </body>
 
 </html>

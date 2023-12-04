@@ -1,0 +1,56 @@
+
+  [  {
+    "_id": 1,
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "year": 2022,
+    "color": "Silver",
+    "characteristics": ["Power Windows", "Air Conditioning", "Bluetooth"],
+    "img": "images/amv.png"
+  },
+  {
+    "_id": 2,
+    "make": "McLaren",
+    "model": "P1",
+    "year": 2023,
+    "color": "Red",
+    "characteristics": ["Convertible Top", "Leather Seats", "Backup Camera"],
+    "img": "images/mp1.png"
+  },
+  {
+    "_id": 3,
+    "make": "Bugatti",
+    "model": "Veyron",
+    "year": 2021,
+    "color": "Blue",
+    "characteristics": ["Sunroof", "Lane Departure Warning", "Apple CarPlay"],
+    "img": "images/bug.png"
+  },
+  {
+    "_id": 4,
+    "make": "Lamborghini",
+    "model": "Aventador",
+    "year": 2022,
+    "color": "Black",
+    "characteristics": ["Four-Wheel Drive", "Towing Package", "Touchscreen Infotainment"],
+    "img": "images/lambo.png"
+  },
+  {
+    "_id": 5,
+    "make": "Mercedes",
+    "model": "S7",
+    "year": 2023,
+    "color": "White",
+    "characteristics": ["Keyless Entry", "Remote Start", "Blind Spot Monitoring"],
+    "img": "images/merc.png"
+  },
+  {
+    "_id": 6,
+    "make": "Tesla",
+    "model": "Model 3",
+    "year": 2021,
+    "color": "Midnight Silver Metallic",
+    "characteristics": ["Autopilot", "Electric", "Panoramic Roof"],
+    "img": "images/tesla.png"
+  }
+  ]

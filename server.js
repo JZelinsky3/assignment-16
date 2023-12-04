@@ -1,93 +1,114 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const Joi = require('joi');
-const path = require('path');
-const fs = require('fs');
-
+const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(express.static('public'));
+const Joi = require("joi");
+const multer = require("multer");
+app.use(express.static("public"));
+app.use(express.json());
+const cors = require("cors");
 app.use(cors());
-app.use(bodyParser.json());
 
-const dataPath = path.join(__dirname, 'movies.json');
-let data = [];
-
-// Load initial data from movies.json
-try {
-    const rawData = fs.readFileSync(dataPath);
-    data = JSON.parse(rawData);
-} catch (error) {
-    console.error('Error reading movies.json:', error.message);
-}
-
-const schema = Joi.object({
-    title: Joi.string().required(),
-    genre: Joi.string().required(),
-    director: Joi.string(),
-    actors: Joi.array().items(Joi.string()),
-    rating: Joi.number(),
-    quotes: Joi.array().items(Joi.string()),
-});
+const upload = multer({ dest: __dirname + "/public/images" });
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(__dirname + "/index.html");
 });
 
-app.get('/api/movies', (req, res) => {
-    res.json(data);
+const dataPath = path.join(__dirname, 'cars.json');
+let cars = [];
+
+app.get("/api/cars", (req, res) => {
+  res.send(cars);
 });
 
-app.post('/api/comedy-movies', (req, res) => {
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+app.get("/api/cars/:id", (req, res) => {
+  const id = parseInt(req.params.id);
 
-    const newMovie = { id: (data.length + 1).toString(), ...req.body };
-    data.push(newMovie);
+  const car = cars.find((c) => c._id === id);
 
-    // Save the updated data to movies.json
-    fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
+  if (!car) {
+    res.status(404).send("The car with the given id was not found.");
+  }
 
-    res.json(newMovie);
+  res.send(car);
 });
 
-app.put('/api/comedy-movies/:id', (req, res) => {
-    const { id } = req.params;
+app.post("/api/cars", upload.single("img"), (req, res) => {
+  const result = validateCar(req.body);
 
-    const movieToUpdate = data.find(movie => movie.id === id);
-    if (!movieToUpdate) return res.status(404).json({ message: 'Movie not found' });
+  if (result.error) {
+    res.status(400).send(result.error.details[0].message);
+    return;
+  }
 
-    const { error } = schema.validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const car = {
+    _id: cars.length + 1,
+    make: req.body.make,
+    model: req.body.model,
+    year: parseInt(req.body.year),
+    color: req.body.color,
+    carFeatures: req.body.carFeatures.split(","),
+  };
 
-    // Update the movie data
-    movieToUpdate.title = req.body.title;
-    movieToUpdate.genre = req.body.genre;
-    movieToUpdate.director = req.body.director;
-    movieToUpdate.actors = req.body.actors;
-    movieToUpdate.rating = req.body.rating;
-    movieToUpdate.quotes = req.body.quotes;
+  if (req.file) {
+    car.img = "images/" + req.file.filename;
+  }
 
-    // Save the updated data to movies.json
-    fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-
-    res.json(movieToUpdate);
+  cars.push(car);
+  res.send(cars);
 });
 
-app.delete('/api/comedy-movies/:id', (req, res) => {
-    const { id } = req.params;
+app.put("/api/cars/:id", upload.single("img"), (req, res) => {
+  const id = parseInt(req.params.id);
 
-    // Remove the movie data by ID
-    data = data.filter(movie => movie.id !== id);
+  const car = cars.find((c) => c._id === id);
 
-    // Save the updated data to movies.json
-    fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
+  const result = validateCar(req.body);
 
-    res.json({ message: 'Deleted successfully' });
+  if (result.error) {
+    res.status(400).send(result.error.details[0].message);
+    return;
+  }
+
+  car.make = req.body.make;
+  car.model = req.body.model;
+  car.year = parseInt(req.body.year);
+  car.color = req.body.color;
+  car.carFeatures = req.body.carFeatures.split(",");
+
+  if (req.file) {
+    car.img = "images/" + req.file.filename;
+  }
+
+  res.send(car);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+app.delete("/api/cars/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const car = cars.find((c) => c._id === id);
+
+  if (!car) {
+    res.status(404).send("The car with the given id was not found.");
+  }
+
+  const index = cars.indexOf(car);
+  cars.splice(index, 1);
+  res.send(car);
+});
+
+const validateCar = (car) => {
+  const schema = Joi.object({
+    _id: Joi.allow(""),
+    carFeatures: Joi.allow(""),
+    make: Joi.string().min(2).required(),
+    model: Joi.string().min(2).required(),
+    year: Joi.number().integer().min(1886).max(new Date().getFullYear()).required(),
+    color: Joi.string().min(2).required(),
+  });
+
+  return schema.validate(car);
+};
+
+app.listen(3000, () => {
+  console.log("I'm listening");
 });
